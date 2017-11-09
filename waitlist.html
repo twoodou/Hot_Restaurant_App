@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hot Restaurant App</title>
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Hot Restaurant App</h1>
+      <h3>Current Reservations and Waiting List</h3>
+      <hr>
+      <a href="/add"><button type="button" class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-plus"></span> Add Reservation</button></a>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><strong>Current Reservations</strong></h3>
+          </div>
+          <div class="panel-body">
+            <div class="well">
+              <h2 id="reservationNumber"></h2>
+              <div id="stats">
+                <h3><span id="name"></span></h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><strong>Waiting List</strong></h3>
+          </div>
+          <div class="panel-body">
+            <div class="well">
+              <h2 id="reservationNumber"></h2>
+              <div id="stats">
+                <h3><span id="name2"></span></h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+  <div class="container">
+    <p>Control Panel</p>
+    <p>
+      <a href="#" id="clear">Clear Table</a>
+       |
+      <a href="/all">API Show Waitlist</a>
+    </p>
+  </div>
+</footer>
+<script type="text/javascript">
+   $(document).ready(function() {
+    //  var searchedCharacter = $("#character-search").val().trim();
+    //  searchedCharacter = searchedCharacter.replace(/\s+/g, "").toLowerCase();
+     $.get("/all", function(data) {
+       console.log(data);
+       for(var i =0; i <= 4; i++){
+         $("#name").append("<div class='newCustomer'>" + data[i].name + "</div>");
+       }
+       for(var i =5; i<data.length; i++){
+         $("#name2").append("<div class='newCustomer'>" + data[i].name + "</div>");
+       }
+      //  if (data) {
+      //    $("#stats").show();
+      //    $("#name").text(data.name);
+      //    $("#role").text(data.role);
+      //    $("#age").text(data.age);
+      //    $("#force-points").text(data.forcePoints);
+      //  }
+      //  else {
+      //    $("#name").text("The force is not strong with this one. Your character was not found.");
+      //    $("#stats").hide();
+      //  }
+     });
+   });
+ </script>
+</body>
+</html>
